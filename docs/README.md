@@ -52,7 +52,7 @@ Fasta files for the PhiX and reference genomes can be obtained from the Illumina
 http://support.illumina.com/sequencing/sequencing_software/igenome.html). 
 
 
-##INSTALLATION
+##INSTALLATION OF HaSAPPy
 
 To use HaSAPPy program download the package from GitHub repository. If you have git installed you can use the following command:
 ```
@@ -92,12 +92,12 @@ The program requires two variables:
 
 **-o** (OUTPUT)	location where to store pandas library containing gene annotations necessary for HaSAPPy program. Informations are stored in a .pkl file. Add .pkl extension to the PATH provided
 
-Ex.
+An example command line for generating an annotation for the mouse genome:
 ```
 User$ python GeneReference_built.py -i User/HaSAPPy/Doc/mm10_REFSEQgenes.txt -o User/HaSAPPy/mm10_HaSAPPY_refernce.pkl
 ```
 
-Write output PATH in LoadModule.txt where requested (see next)
+To use a Gene Annotation Reference .pkl file with HaSAPPy its file path is entered in the command script. (see RUNNING HaSAPPy Tutorial for details).
 
 
 ##RUN HaSAPPy SOFTWARE
