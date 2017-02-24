@@ -217,6 +217,7 @@ Would you like to store permanently BAM aligned files  (mark ‘Y’ or ’N’)
 If this is the first step in your workflow and this module is the starting point of the analysis, you should provide information on the name and properties of the NGS libraries and the corresponding Fastq files in the input fields below. This is particularly useful if tools from Illumina have been used for PhiX removal and adaptor trimming. It is possible to use preprocessed read files and specifying the Fastq files here.
 
 > **NOTE:** If analysis starts here the Fastq file must be decompressed, HaSAPPy presently does not accept compressed formats at this step of the analysis.
+
 ```
 !!!N.B. Compile the following section just if this is your starting point!!!
 How many libraries do you want to analyse?:
