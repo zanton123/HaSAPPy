@@ -95,7 +95,7 @@ For each NGS read dataset analyzed a specific folder will be generated using as 
 Information and data obtained from section 7 to 9 are not referring to a particular library but instead to an analysis performed comparing multiple libraries. Data will be collected in the Analysis folder according to the date in which the analysis is performed. If a similar folder already exists, HaSAPPy will request an alternative name for analysis destination.
 
 
-## Section 2: Trimming of Adaptor and Sequence quality selection
+## Section 2: Read trimming of adaptor and and low quality sequences
 
 ```
 How many libraries do you want to analyse?:
@@ -156,7 +156,7 @@ Would you like to store quality selected libraries (mark ‘Y’ or ’N’)?
 @2K) N
 ```
 
-## Section 3: Alignment and discharging PhiX genome
+## Section 3: Alignment and discharging PhiX genome reads
 
 If NGS sequence libraries were spiked with PhiX control fragments removal of the corresponding PhiX reads is required. Provide the absolute PATH to the Phix genome index for Bowtie2. The file name of the index without file extension should be provided (see Bowtie2 reference):
 ```
