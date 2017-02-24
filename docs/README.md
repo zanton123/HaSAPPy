@@ -20,7 +20,7 @@ HaSAPPy performs analysis of NGS datasets form pooled haploid mammalian cell scr
 
 ##REQUISITES
 
-For the correct functionality of HaSAPPy program the following Python Packages are necessary and requested to download/update using the `pip -instal` or `pip install --upgrade` command:
+For the correct functionality of HaSAPPy program the following Python Packages are necessary and requested to download/update using the `pip -install` or `pip install --upgrade` command:
  - numpy
  - HTSeq
  - matplotlib
