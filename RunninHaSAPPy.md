@@ -16,7 +16,7 @@ For this purpose, it will be assumed that all files are under a HaSAPPy folder w
 Users/User
 ```
 
-A HaSAPPy command script is separated into 9 sections corresponding to differen steps of data processing, analysis, and output customization.
+A HaSAPPy command script is separated into 9 sections corresponding to the steps of data processing, analysis, and output customization.
 
 ## Section 0: Which analysis would you like to perform?
 Select which step of the analysis to perform. Mark ‘Y’ to execute the corresponding step of the pipeline, 'N' else.
