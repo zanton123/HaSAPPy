@@ -1,7 +1,7 @@
 #Controlling the HaSAPPy workflow throught command scripts
 
 
-The HaSAPPy analysis pipeline is controlled by a command script that is provided by the user (the LoadModule.txt file). All the parameters are collected by the INFOloads.py module and stored in an INFO object that organizes software scheduling and stores user defined parameters.
+The HaSAPPy analysis pipeline is controlled by a command script that is provided by the user (the LoadModule.txt file). All the parameters are collected by the **INFOloads.py** module and stored in an **INFO object** that organizes software scheduling and stores user defined parameters.
 The file is subdivided in different sections marked by an identification number (0-9); each section is characterized by multiple input fields that are marked with a TAG `@1a)`, consisting of an `@`, the section number, a letter referring to the specific input field, and a `)`, after which user input can be entered on the same line:
 ```
 @1A) <Operator name>
@@ -122,11 +122,11 @@ Location of input file 1 (add additional lines if necessary):
 …
 ```
 
-If **paired-end sequencing** is used alignment of read pairs should be performed. For this a second fastq file can be provided containing the second sequencing run.
-> **IMPORTANT:** The order of file names must be the same as in  `@2C)` and  `@2D)` to ensure that HaSAPPy matches the correct read pairs and experiments:
+If **paired-end sequencing** is used alignment of read pairs should be performed. For this a reverse read sequence fastq file can be provided containing the second sequencing run.
+> **IMPORTANT:** The order of file names must be the same as in  `@2C)` and the forward read sequence in `@2D)` to ensure that HaSAPPy matches the correct read pairs and experiments:
 
 ```
-Location of input file 2 (if pair-end) (add additional lines if necessary):
+Location of input file 2 (if paired-end) (add additional lines if necessary):
 @2E)
 @2E)
 …
@@ -240,19 +240,23 @@ Location of input file 2 (if pair-end) (add additional lines if necessary):
 
 ## Section 5: Identification of Independent Insertions (I.I.)
 
-During the definition of Independent insertions, user can provide a minimal number of read count requested to define an insertion. This parameter can be used to reduce noise deriving from sequencing procedure, but can also affect library complexity and resolution (particularly in unselected libraries). An integer number should be provided. Default is ‘1’. 
+For the definition of Independent Insertions from read files, a minimal number of read count can be provided. Insertions that have less than this threshold number of reads at positions will be discarded. This parameter can be useful for reducing noise deriving from sequencing procedure or contaminations. In case sequencing depth is not very deep it also could negatively affect library complexity and resolution (particularly in unselected control samples with large numbers of different insertions). An integer number should be provided. Default is ‘1’, which maintains all insertions.
 ```
 Number of reads to define a I.I.:
 @5A) 2
 ```
 
-HaSAPPy provides the possibility to remove PCR-duplicates from the read count if libraries were sequenced in the pair-end mode (for details refer to HaSAPPy manual). If you activate this option duplicates and not pair-ends aligned reads will be discharged.
+HaSAPPy provides the possibility to remove PCR-duplicates from the read count if libraries were sequenced in the paired-end mode. Reads that have exactly the same genomic alignment position on both ends will be merged as PCR duplicates. If you activate this option duplicates and not paired-ends aligned reads will be discharged.
+
+> **NOTE:** This option is implemented in HaSAPPy as an experimental feature and will undergo extensive testing onse paired-end sequencing dataset for screening experiments become available.
+
 ```
 If pair-end libraries, do you want to remove PCR-duplicates (mark ‘Y’ or ’N’)?
 @5B) N
 ```
 
-For each read, alignment software supply a reliability value of the alignment to the reference genome. In this parameter the number of mismatches and match uniqueness is taken into account. Increasing the alignment fidelity parameter can help to reduce noise. Mark ‘Y’ if you want to activate this selection and provide an integer number as limit. Default is ‘0’. 
+Read mappers provide also information on the quality of read alignments to the reference genome. This parameter (MAPQ) takes the number of mismatches and matches as well as the uniqueness of the alignment position into account. Increasing the alignment quality parameter can help to reduce alignment errors that could affect the analysis, but also will lead to the elimination of reads and therefore could lead to reduced sensitivity. Enter `Y` in the input field below, if you want to activate this selection and provide an integer number as MAPQ threshold (default is 0, all reported alignments are accepted):
+
 ```
 Do you want to indicate a level of alignment fidelity (mark ‘Y’ or ’N’):
 @5C) Y
@@ -260,7 +264,10 @@ If level of alignment fidelity is requested, provide a limit number:
 @5D) 5
 ```
 
-If this module is the starting point of the analysis, you should supply information on the name and properties of the libraries and the SAM file referring to their alignment
+HaSAPPy provides the possibility to enter a workflow at this step. If this module is the starting point of woud analysis, you should supply information on the name and properties of the NGS libraries and the paths to the read alignment files in SAM format:
+
+> **NOTE:** HaSAPPy does not yet accept BAM files as input at this step in the workflow and SAM files should be used. This avoids repeated compression and decompression but adds to storage requirements.
+
 ```
 !!!N.B. Compile the following section just if this is your starting point!!!
 How many library do you want to analyse?:
@@ -278,6 +285,7 @@ Location of input file 1(add additional lines if necessary):
 ```
 
 ## Section 6: Classification of I.I. in genes
+
 To categorize I.I. according their location in genes, you are requested to provide the gene reference file created with the GeneReference_built.py module. The absolute PATH must be supplied
 ```
 Location of gene reference:
@@ -573,3 +581,5 @@ Location of file storing GroupAnalysis informations:
 Save the completed `LoadModule.txt` file with a new name and use it as input for runnning the HaSAPPy_start.py module from the command line.
 
 `python HaSAPPy_start.py <path-to-LoadModule.txt>`
+
+HaSAPPy command scripts are parsed in straight forward a simple way by searching for the specific TAGs and reading the remainder of the line into a Python object. Only TAG lines that correspond to scheduled data processing sections are required, all other lines are ignored by HaSAPPy and simply support the user for entering the correct information. This should make it possible to use a line based interface for producing command scripts in an automated or GUI supported way.
