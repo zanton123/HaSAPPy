@@ -94,7 +94,7 @@ The program requires two variables:
 
 An example command line for generating an annotation for the mouse genome:
 ```
-User$ python GeneReference_built.py -i User/HaSAPPy/Doc/mm10_REFSEQgenes.txt -o User/HaSAPPy/mm10_HaSAPPY_refernce.pkl
+python GeneReference_built.py -i User/HaSAPPy/Doc/mm10_REFSEQgenes.txt -o User/HaSAPPy/mm10_HaSAPPY_refernce.pkl
 ```
 
 To use a Gene Annotation Reference .pkl file with HaSAPPy its file path is entered in the command script. (see RUNNING HaSAPPy Tutorial for details https://github.com/gdiminin/HaSAPPy/blob/master/docs/Tutorials/Test_HaSAPPy_installation.md).
@@ -109,6 +109,9 @@ The analysis workflow can then be strated using HaSAPPy_start.py with the approp
 ```
 User$ python HaSAPPY_start.py User/HaSAPPy/Commands/LoadModule_170101.txt
 ```
+
+
+
 
 **REPORTING OF ERRORS, FEATURE REQUEST, AND REQUESTS FOR HELP
 
