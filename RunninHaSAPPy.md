@@ -124,6 +124,7 @@ Location of input file 1 (add additional lines if necessary):
 
 If pair-end read sequencing was used and pair-end alignment should be performed a second fastq file should be provided.
 > **Note:** The order of file names must be the same as in  `@2C)` and  `@2D)` to ensure that HaSAPPy matches the correct read pairs and experiments:
+
 ```
 Location of input file 2 (if pair-end) (add additional lines if necessary):
 @2E)
