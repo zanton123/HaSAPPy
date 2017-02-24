@@ -155,9 +155,9 @@ Would you like to store quality selected libraries (mark ‘Y’ or ’N’)?
 @2K) N
 ```
 
-##Section 3: Alignment and discharging PhiX genome
+## Section 3: Alignment and discharging PhiX genome
 
-If sequence libraries were spiked with PhiX control fragments removal of PhiX reads is required. Provide the absolute PATH to the Phix genome index for Bowtie2. The file name of the index without file extension should be provided (see Bowtie2 reference):
+If NGS sequence libraries were spiked with PhiX control fragments removal of the corresponding PhiX reads is required. Provide the absolute PATH to the Phix genome index for Bowtie2. The file name of the index without file extension should be provided (see Bowtie2 reference):
 ```
 Location of Phix reference genome:
 @3A) /Users/User/HaSAPPy/reference/Phix/NCBI/1993-04-28/Sequence/BowtieIndex/genome
@@ -193,26 +193,30 @@ Location of input file 2 (if pair-end) (add additional lines if necessary):
 …
 ```
 
-##Section 4: Alignment to the reference genome
-Indicate which alignment program you want to use for align library genes to the reference genome. Write the name as indicated in parenthesis. For details in programs specification refer to the HaSAPPy manual
+## Section 4: Alignment to the reference genome
+
+For mapping reads to the reference genome (mouse or human, etc) HaSAPPy comes preconfigured for use of Bowtie2, NextGenMap (ngm), and nvBowtie. Enter the read alignment program you want to use for read mapping to the reference genome.
 ```
 Alignment program to be used (bowtie2, nvBowtie, NextGenMap):
 @4A) bowtie2
 ```
-	
-Provide the absolute PATH of reference genome location used by bowtie2 to align reads. For bowtie2 and nvBowtie the file name without extension must be indicated. For NextGenMap, provide the “xxxxx.fa” file
+>**NOTE:** The selected read aligner must be installed on your system and reachable form the PATH.
+
+Provide the absolute PATH of reference genome index for the selected read mapper. For bowtie2 and nvBowtie the path and file name of the genome index without file extension must be entered. For NextGenMap, provide the path to the genome sequence Fasta file (“xxxxx.fa” file):
 ```
 Location of reference genome:
 @4B) /Users/User/HaSAPPy/reference/Mus_musculus/UCSC/mm10/Sequence/BowtieIndex/genome
 ```
 
-Mark ‘N’ if you don’t want to permanently store the output file generated. In this case the file will be used by the IIdefinition module and erased after
+Enter `N` in the input field below, if you don’t want to permanently store the output file generated. In this case the file will be used by the IIdefinition module and erased afterwards:
 ```
 Would you like to store permanently BAM aligned files  (mark ‘Y’ or ’N’)?
 @4C)Y
 ```
 
-If this module is the starting point of the analysis, you should provide information on the name and properties of the libraries and the Fastq file referring to them (Fastq file must be decompressed)
+If this is the first step in your workflow and this module is the starting point of the analysis, you should provide information on the name and properties of the NGS libraries and the corresponding Fastq files in the input fields below. This is particularly useful if tools from Illumina have been used for PhiX removal and adaptor trimming. It is possible to use preprocessed read files and specifying the Fastq files here.
+
+> **NOTE:** If analysis starts here the Fastq file must be decompressed, HaSAPPy presently does not accept compressed formats at this step of the analysis.
 ```
 !!!N.B. Compile the following section just if this is your starting point!!!
 How many libraries do you want to analyse?:
@@ -233,7 +237,7 @@ Location of input file 2 (if pair-end) (add additional lines if necessary):
 …
 ```
 
-##Section 5: Identification of Independent Insertions (I.I.)
+## Section 5: Identification of Independent Insertions (I.I.)
 
 During the definition of Independent insertions, user can provide a minimal number of read count requested to define an insertion. This parameter can be used to reduce noise deriving from sequencing procedure, but can also affect library complexity and resolution (particularly in unselected libraries). An integer number should be provided. Default is ‘1’. 
 ```
