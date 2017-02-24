@@ -85,12 +85,14 @@ INFOloads module will generate in this docs folder:
     │
     ├── graph
     │   └── <graphic output when specified>
-    ├── raw
+    └── raw
         └── <data bases>
 ```
 
-For each library analyzed a specific folder will be generated using as reference the library name provided by the user in the following section. If a similar folder already exists, HaSAPPy will request an alternative name for library name/destination. Written files from section 1 to section 6 will be stored in this folder. In the library_info.txt file, it is possible to find all information of the run and of the collected parameters.
+For each NGS read dataset analyzed a specific folder will be generated using as reference the library name provided by the user in the following section. If a similar folder already exists, HaSAPPy will request an alternative name for library name/destination. Output files from section 1 to section 6 will be written to this folder. The library_info.txt file records all information of the run and of the selected parameters.
+
 Information and data obtained from section 7 to 9 are not referring to a particular library but instead to an analysis performed comparing multiple libraries. Data will be collected in the Analysis folder according to the date in which the analysis is performed. If a similar folder already exists, HaSAPPy will request an alternative name for analysis destination.
+
 
 ## Section 2: Trim Adaptor and Sequence quality selection
 
@@ -101,7 +103,7 @@ Are those libraries sequenced pair-end?:
 @2B) N
 ```
 	
-The name of the library will be used as first attempt as name for folder generation and will be used as ‘tag’ to identify generated output and as a reference for Group analysis (for convenience it would be better to avoid too long names).
+The name of the library will be used as first attempt as name for folder generation and will be used as ‘tag’ to identify generated output and as a reference for Group analysis. It is requested that the user selects a short and meaningful name that must not contain spaces:
 
 > **IMPORTANT** Don’t use spaces in the name!!
 
