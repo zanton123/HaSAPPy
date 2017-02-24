@@ -4,8 +4,10 @@
 
 ##INTRODUCTION
 
-Forward genetic screens represent one of the most important approaches to unveil the complexity of cellular mechanisms. The derivation of different mammalian haploid cell models (from tumors and from embryos) opened the possibility to perform forward genetic screens using insertional mutagenesis in mammals.
-HaSAPPy software can be used to identify insertion locations in the whole genome, map them at the level of genes, and classify insertions according to their effects on gene expression. The code conforms to current Python programming guidelines and can be freely adapted and extended according to user needs.
+Forward genetic screens are becoming increasingly useful as approaches to unveil the complexity of cellular mechanisms. Recent introduction of mammalian haploid cells opened the possibility to perform forward genetic screens using insertional mutagenesis in mammals. Haploid cells have originally been obtained from human tumors and subsequently have been established from haploid embryos of several mammals.
+Mutagenesis of haploid cells leads to hemizygous mutantions which ensures phenotypic exposure. This is in contrast to diploid cells, where in general two copies of each chromosome are present, and effects of mutations in specific genes can be masked by the functional copy on the second chromosome.
+For screening viral gene trap vectors are commonly used as mutagens for their large mutational effect and utility for providing a sequence tag for the genomic insertion site. Large haploid mutant pools are established by viral transduction following by selection of a phenotype of interest. Subsequent identification of viral insertions that become enriched after selection can define gene mutations and pathways that contribute to the phenotype under investigation. Readout of many thousands of insertion sites has become possible by deep sequencing of DNA extracted from large cell pools using specialized Next Generation Sequencing (NGS) protocols.
+HaSAPPy performs analysis of NGS datasets form pooled haploid mammalian cell screens and is used to identify insertion locations in the whole genome, map them at the level of genes, and classify insertions according to their effects on gene function. Customizable output of all calculated parameters and ranking of candidate genes is performed. The implementation conforms to current Python programming guidelines and can be freely adapted and extended according to user needs.
 
 **Modules:**
  - Trim adaptor and sequence by quality
@@ -44,7 +46,17 @@ File containing genome sequence of the organism of interest should be provided t
 
 ##INSTALLATION
 
-To use HaSAPPy program download the package from GitHub repository. Programs can be started from the 'HaSAPPy/program' subfolder using command prompt
+To use HaSAPPy program download the package from GitHub repository. If you have git installed you can use the following command:
+```
+cd
+git clone https://github.com/gdiminin/HaSAPPy.git
+```
+This will install all Python files in the 'HaSAPPy/program' folder under your home folder. For read preprocessing a precompiled executable PreprocessReads is supplied. This is an optional step in data processing and if desired requires to set the execute property on this file:
+```
+cd
+git clone https://github.com/gdiminin/HaSAPPy.git
+```
+
 
 
 ##GENERATE GENES REFERENCE LIBRARY FOR HaSAPPy SOFTWARE
