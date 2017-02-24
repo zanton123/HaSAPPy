@@ -19,6 +19,7 @@ Users/User
 A HaSAPPy command script is separated into 9 sections corresponding to the steps of data processing, analysis, and output customization.
 
 ## Section 0: Which analysis would you like to perform?
+
 Select which step of the analysis to perform. Mark ‘Y’ to execute the corresponding step of the pipeline, 'N' else.
 
 ```
@@ -94,7 +95,7 @@ For each NGS read dataset analyzed a specific folder will be generated using as 
 Information and data obtained from section 7 to 9 are not referring to a particular library but instead to an analysis performed comparing multiple libraries. Data will be collected in the Analysis folder according to the date in which the analysis is performed. If a similar folder already exists, HaSAPPy will request an alternative name for analysis destination.
 
 
-## Section 2: Trim Adaptor and Sequence quality selection
+## Section 2: Trimming of Adaptor and Sequence quality selection
 
 ```
 How many libraries do you want to analyse?:
