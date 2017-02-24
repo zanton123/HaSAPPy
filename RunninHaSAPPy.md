@@ -561,5 +561,7 @@ Location of file storing GroupAnalysis informations:
 @9I)
 ```
 
-##Conclusive remarks
-Save the LoadModule.txt file with a new name and use it with the HaSAPPy_start.py module
+##Final remarks
+Save the completed `LoadModule.txt` file with a new name and use it as input for runnning the HaSAPPy_start.py module from the command line.
+
+`python HaSAPPy_start.py <path-to-LoadModule.txt>`
