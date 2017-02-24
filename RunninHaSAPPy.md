@@ -53,14 +53,14 @@ In the pipeline multiple modules can be processed if they are performed in succe
 
 ## Section 1: General Information
 
-Provide a user name. It will be stored in the file recording run information
+A user name can be provided that will be recorded along with the run information (this field is optional):
 
 ```
 Operator Name: 
 @1A) Anton Wutz
 ```
 
-Provide an absolute PATH of an existing folder where all the files produced in the analysis will be stored.
+The folder for all files produced by an analysis workflow can be specified through a user selected PATH in the filesystem. The PATH must exist i the file system and point to the top-level folder where the folder structure for HaSAPPy intermedidiary and output files will be stored. It is the responsibility of the user to ensure that enough storage capacity is available to store the entire set of data files, which can be significant depending on the scale of the project:
 
 ```
 Storing location (provide a correct path):
@@ -70,19 +70,23 @@ Storing location (provide a correct path):
 INFOloads module will generate in this docs folder:
 
 ```
-|- *library*_yyyy-mm-dd
-    |- *library*_info.txt
-    |- graph
-         |-	…
-    |- raw
-         |-	…
-|- Analysis
-    |- yyyy-mm-dd_info.txt
-    |- graph
-         |-	…
-    |- raw
-         |-	…
-
+/Users/User/HaSAPPy/experiments/
+│
+├── *library*_yyyy-mm-dd
+│   │
+│   ├── graph
+│   │   └── <graphic output of run>
+│   └── raw
+│       └── <intermediary files of data processing>
+│
+└── Analysis
+    │
+    ├── yyyy-mm-dd_info.txt
+    │
+    ├── graph
+    │   └── <graphic output when specified>
+    ├── raw
+        └── <data bases>
 ```
 
 For each library analyzed a specific folder will be generated using as reference the library name provided by the user in the following section. If a similar folder already exists, HaSAPPy will request an alternative name for library name/destination. Written files from section 1 to section 6 will be stored in this folder. In the library_info.txt file, it is possible to find all information of the run and of the collected parameters.
