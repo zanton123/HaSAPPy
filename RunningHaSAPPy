@@ -1,4 +1,5 @@
 #Controlling the HaSAPPy workflow throught the command script
+
 ##General informations
 The HaSAPPy analysis pipeline is controlled by a command script that is provided by the user (the LoadModule.txt file). All the parameters are collected by the INFOloads.py module and stored in an INFO object that organizes software scheduling and stores user defined parameters.
 The file is subdivided in different sections marked by an identification number (0-9); each section is characterized by multiple input fields marked with an ‘@’, the section tag, a letter referring to the task and ‘)’. After the parenthesis user input can be entered
