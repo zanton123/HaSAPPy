@@ -1,4 +1,4 @@
-#Controlling the HaSAPPy workflow throught the command script
+#Controlling the HaSAPPy workflow throught command scripts
 
 
 The HaSAPPy analysis pipeline is controlled by a command script that is provided by the user (the LoadModule.txt file). All the parameters are collected by the INFOloads.py module and stored in an INFO object that organizes software scheduling and stores user defined parameters.
@@ -67,7 +67,7 @@ Storing location (provide a correct path):
 @1B) /Users/User/HaSAPPy/experiments
 ```
 
-INFOloads module will generate in this docs folder:
+The **INFOloads.py** module will generate the following folder structure for the analysis:
 
 ```
 /Users/User/HaSAPPy/experiments/
@@ -103,7 +103,7 @@ Are those libraries sequenced pair-end?:
 @2B) N
 ```
 	
-The name of the library will be used as first attempt as name for folder generation and will be used as ‘tag’ to identify generated output and as a reference for Group analysis. It is requested that the user selects a short and meaningful name that must not contain spaces:
+The name of the library will be used as first attempt as name for folder generation and will be used as `tag` to generate file names of output and table headers for Group analysis. It is requested that the user selects a short and meaningful name that must not contain spaces:
 
 > **IMPORTANT** Don’t use spaces in the name!!
 
@@ -114,7 +114,7 @@ Name of the libraries (add additional lines if necessary):
 …
 ```
 
-Absolute PATH of the fastq file referring to the experiment (also compressed format can be provided)
+Specify the absolute PATH (from the system root `/`) to the NGS read files in FastQ format. It is important to specify the file paths in the same order as the corresponding names of the experiments in `@2C)`. Compressed files (`.fastq.gz`) can also be processed:
 ```
 Location of input file 1 (add additional lines if necessary):
 @2D) /Users/User/HaSAPPy/experiments/raw_data/file1.fastq
@@ -122,7 +122,8 @@ Location of input file 1 (add additional lines if necessary):
 …
 ```
 
-If library was sequenced pair-end and user wants to make pair-end alignment second fastq file should be provided
+If pair-end read sequencing was used and pair-end alignment should be performed a second fastq file should be provided.
+> **Note:** The order of file names must be the same as in  `@2C)` and  `@2D)` to ensure that HaSAPPy matches the correct read pairs and experiments:
 ```
 Location of input file 2 (if pair-end) (add additional lines if necessary):
 @2E)
