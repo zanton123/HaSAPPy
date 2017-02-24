@@ -97,19 +97,26 @@ An example command line for generating an annotation for the mouse genome:
 User$ python GeneReference_built.py -i User/HaSAPPy/Doc/mm10_REFSEQgenes.txt -o User/HaSAPPy/mm10_HaSAPPY_refernce.pkl
 ```
 
-To use a Gene Annotation Reference .pkl file with HaSAPPy its file path is entered in the command script. (see RUNNING HaSAPPy Tutorial for details).
+To use a Gene Annotation Reference .pkl file with HaSAPPy its file path is entered in the command script. (see RUNNING HaSAPPy Tutorial for details https://github.com/gdiminin/HaSAPPy/blob/master/docs/Tutorials/Test_HaSAPPy_installation.md).
 
 
 ##RUN HaSAPPy SOFTWARE
 
-Compile LoadModule.txt file according to instructions and save the modified file (Don’t overwrite it). Run the program using HaSAPPy_start.py file. The program requests as parameter the location of LoadModule file.
+Running a data analysis requires a command script that is pecified on the command line as input for HaSAPPy. An empty script is provided in docs/LoadModule.txt. Copy this file and enter the experimental parameters in the form (see more detail on how to generate a command script at https://github.com/gdiminin/HaSAPPy/blob/master/docs/Tutorials/Compile_LoadModule.md).
 
-Ex.
+The analysis workflow can then be strated using HaSAPPy_start.py with the appropriate command script, see the following example:
+
 ```
 User$ python HaSAPPY_start.py User/HaSAPPy/Commands/LoadModule_170101.txt
 ```
 
+**REPORTING OF ERRORS, FEATURE REQUEST, AND REQUESTS FOR HELP
 
+Any issues with using HaSAPPy should be raised at https://github.com/gdiminin/HaSAPPy/issues
+Feature requests and pull request are appreciated https://github.com/gdiminin/HaSAPPy/pulls
+and be attended to as quickly as resources allow.
+
+Send additional enquiries to `giulio.diminin@biol.ethz.ch`
 
 
 
