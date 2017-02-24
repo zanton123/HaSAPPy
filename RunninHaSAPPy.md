@@ -122,8 +122,8 @@ Location of input file 1 (add additional lines if necessary):
 …
 ```
 
-If pair-end read sequencing was used and pair-end alignment should be performed a second fastq file should be provided.
-> **Note:** The order of file names must be the same as in  `@2C)` and  `@2D)` to ensure that HaSAPPy matches the correct read pairs and experiments:
+If **paired-end sequencing** is used alignment of read pairs should be performed. For this a second fastq file can be provided containing the second sequencing run.
+> **IMPORTANT:** The order of file names must be the same as in  `@2C)` and  `@2D)` to ensure that HaSAPPy matches the correct read pairs and experiments:
 
 ```
 Location of input file 2 (if pair-end) (add additional lines if necessary):
@@ -132,7 +132,7 @@ Location of input file 2 (if pair-end) (add additional lines if necessary):
 …
 ```
 
-Provide the adaptor sequence that could be present at the end of the read and that is necessary to remove
+PCR amplification can lead to reads of a reduced length and consequently the NGS sequencing run might averlap the adaptor sequence on the other side. Provide the adaptor sequence that could be present at the end of the read for removal (on Illumina Sequencers the first sequence run can overlap the p7 adaptor and the second the p5 adaptor):
 ```
 Adaptor p7 sequence (for trimming 3’ ends of sequence in file 1):
 @2F) ATCTCGTATGCCGTCTTCTGCTT
@@ -140,7 +140,7 @@ Adaptor p5 sequence (for trimming 3’ ends of sequence in file 2):
 @2G)
 ```
 
-Provide value information for quality trimming. Sequences are scanned for low quality bases (Initial bad quality QA value detected ‘@2H)’, and if the fidelity of the remaining 3’-end read doesn’t satisfy selected criteria (Quality average limit of 3’end sequence ‘@2J)’, clipping is performed; alternatively, a low quality position is tolerated and scanning of the remainder of the read proceeds. Reads that become too short are discarded.
+Base quality is reported in the FastQ read file. To eliminate low quality sequences from reads PreprocessReads scanns the read for low quality bases that fall below a threshold for `Initial bad quality QA value detected ‘@2H)’`. If the remainder of the read has an average base quality below a `Quality average limit of 3’end sequence ‘@2J)’`, trimming of the read at this position is performed leaving a shorter read of good base quality. If the remainder of the read has sufficiently high average base quality, a low quality position is tolerated and scanning of the remainder of the read proceeds. This ensures that a maximum of sequencing data is retained for data analysis but bad quality reads are eliminated. Reads that become too short after trimming are also discarded, whereby a threshold of 26 bases is used to select reads.
 ```
 Quality selection parameters:
 	Initial bad quality QA value detected:
@@ -149,27 +149,30 @@ Quality selection parameters:
 	@2J) 25
 ```
 
-Mark ‘N’ if you don’t want the permanently store the output file generated. In this case the file will be used by the Align module and erased after
+Intermediate files of data processing can take up a lot of storage space. HaSAPPy has an option to retain all files or to delete the files once they are no longer needed. Enter `N` in the following input field, if you don’t want the permanently store the output file generated. In this case the file will be used by the Align module and erased thereafter.
 ```
 Would you like to store quality selected libraries (mark ‘Y’ or ’N’)?
 @2K) N
 ```
 
-##Section 3: Alignment and discharging Phix genome
+##Section 3: Alignment and discharging PhiX genome
 
-Provide the absolute PATH of the location of the Phix genome used by Bowtie2 as reference to detect and remove Phix sequence from library. The file name without extestion must be indicated
+If sequence libraries were spiked with PhiX control fragments removal of PhiX reads is required. Provide the absolute PATH to the Phix genome index for Bowtie2. The file name of the index without file extension should be provided (see Bowtie2 reference):
 ```
 Location of Phix reference genome:
 @3A) /Users/User/HaSAPPy/reference/Phix/NCBI/1993-04-28/Sequence/BowtieIndex/genome
 ```
 
-Mark ‘N’ if you don’t want the permanently store the output file generated. In this case the file will be used by the Align module and erased after
+Mark `N` if you don’t want the permanently store the output read file that is generated. In this case the file will be used by the Align module and erased afterwards:
 ```
 Would you like to store permanently Phix-cleaned files  (mark ‘Y’ or ’N’)?
 @3B)
 ```
 
-If this module is the starting point of the analysis, you should provide information on the name and properties of the libraries and the Fastq file referring to them (Fastq file must be decompressed)
+HaSAPPy provides the flexibility to start an analysis workflow with preprocessed read files in FastQ format. This facilitates the use of any tools for adaptor trimming. In this case, provide the FastQ files as the starting point of the analysis. Enter the name, read information, and absolute PATH of the Fastq files (the Fastq file must be decompressed):
+
+> **NOTE:** HaSAPPy does not accept compressed FastQ files at this entry into the workflow!
+
 ```
 !!!N.B. Compile the following section just if this is your starting point!!!
 How many libraries do you want to analyse?:
