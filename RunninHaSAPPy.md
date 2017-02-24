@@ -269,7 +269,7 @@ Location of input file 1(add additional lines if necessary):
 …
 ```
 
-# Section 6: Classification of I.I. in genes
+## Section 6: Classification of I.I. in genes
 To categorize I.I. according their location in genes, you are requested to provide the gene reference file created with the GeneReference_built.py module. The absolute PATH must be supplied
 ```
 Location of gene reference:
