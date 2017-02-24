@@ -5,8 +5,11 @@
 ##INTRODUCTION
 
 Forward genetic screens are becoming increasingly useful as approaches to unveil the complexity of cellular mechanisms. Recent introduction of mammalian haploid cells opened the possibility to perform forward genetic screens using insertional mutagenesis in mammals. Haploid cells have originally been obtained from human tumors and subsequently have been established from haploid embryos of several mammals.
+
 Mutagenesis of haploid cells leads to hemizygous mutantions which ensures phenotypic exposure. This is in contrast to diploid cells, where in general two copies of each chromosome are present, and effects of mutations in specific genes can be masked by the functional copy on the second chromosome.
+
 For screening viral gene trap vectors are commonly used as mutagens for their large mutational effect and utility for providing a sequence tag for the genomic insertion site. Large haploid mutant pools are established by viral transduction following by selection of a phenotype of interest. Subsequent identification of viral insertions that become enriched after selection can define gene mutations and pathways that contribute to the phenotype under investigation. Readout of many thousands of insertion sites has become possible by deep sequencing of DNA extracted from large cell pools using specialized Next Generation Sequencing (NGS) protocols.
+
 HaSAPPy performs analysis of NGS datasets form pooled haploid mammalian cell screens and is used to identify insertion locations in the whole genome, map them at the level of genes, and classify insertions according to their effects on gene function. Customizable output of all calculated parameters and ranking of candidate genes is performed. The implementation conforms to current Python programming guidelines and can be freely adapted and extended according to user needs.
 
 **Modules:**
