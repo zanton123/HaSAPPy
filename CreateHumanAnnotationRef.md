@@ -57,7 +57,7 @@ Move the downloaded annotation file into the HaSAPPy/docs folder:
 /Users/User/HaSAPPy/docs
 ```
 
-## Generate the GeneReference.pkl file using the GeneReference_built.py module
+## Generate the GeneReference.pkl file using GeneReference_built.py
 Open the terminal and move to the HaSAPPy program folder
 
 ```
