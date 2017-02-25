@@ -189,14 +189,14 @@ Location of Phix reference genome:
 @3A)/Users/User/HaSAPPy/reference/Phix/NCBI/1993-04-28/Sequence/BowtieIndex/genome
 ```
 
-> **NOTE:** For Bowtie2 the path and filename for the genome should be provided without the file extension!
+> **NOTE:** For Bowtie2 the path and filename for the genome index should be provided without the file extension!
 
 * Section 4
   * 4B
 
 ```
 Location of reference genome:
-@4B) /Users/User/HaSAPPy/reference/Mus_musculus/UCSC/mm10/Sequence/BowtieIndex/genome
+@4B) /Users/User/HaSAPPy/reference/Mus_musculus/UCSC/mm10/Sequence/Bowtie2Index/genome
 ```
 
 * Section 6
@@ -236,34 +236,35 @@ If everything is correctly installed the analysis should finish without any erro
 
 ## Inspect the output
 
-In the /Users/User/HaSAPPy/experiments/test the following files and folders should have been created
+In the `/Users/User/HaSAPPy/experiments/test` folder the following files and folders should have been created
 
 ```
-|- test
-    |- test_1_yyyy-mm-dd
-        |- test_1_info.txt
-        |- graph
-        |- raw
-            |- test_1_Aligned.sam
-            |- ...
-            |- test_1_IIRawdata.pkl
-    |- test_2_yyyy-mm-dd
-        |- test_2_info.txt
-        |- graph
-        |- raw
-            |- test_2_Aligned.sam
-            |- ...
-            |- test_2_IIRawdata.pkl
-    |- Analysis
-        |- yyyy-mm-dd
-            |- analysis_info.txt
-            |- graph
-                |- Xist_SelectedvsControl.svg
-                |- ...
-            |- raw
-                |- GroupAnalysis.pkl
-                |- RawData.pkl
-            |- Table_yyyy-mm-dd.xlsx
+/Users/User/HaSAPPy/experiments/test
+    ├── test_1_yyyy-mm-dd
+    |   ├──
+    |   ├── test_1_info.txt
+    |   ├── graph
+    |   └── raw
+    |       ├── test_1_Aligned.sam
+    |       ├── ...
+    |       └── test_1_IIRawdata.pkl
+    ├── test_2_yyyy-mm-dd
+    |   ├── test_2_info.txt
+    |   ├── graph
+    |   └── raw
+    |       ├── test_2_Aligned.sam
+    |       ├── ...
+    |       └── test_2_IIRawdata.pkl
+    └── Analysis
+        └── yyyy-mm-dd
+            ├── analysis_info.txt
+            ├── graph
+            |   ├── Xist_SelectedvsControl.svg
+            |   └── ...
+            ├── raw
+            |   ├── GroupAnalysis.pkl
+            |   └── RawData.pkl
+            └── Table_yyyy-mm-dd.xlsx
 ```
 
 Exploring the Table_yyyy-mm-dd.xlsx and the Xist_SelectedvsControl.svg files you should aspect the following output:
