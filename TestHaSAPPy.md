@@ -267,11 +267,11 @@ In the `/Users/User/HaSAPPy/experiments/test` folder the following files and fol
             └── Table_yyyy-mm-dd.xlsx
 ```
 
-Exploring the Table_yyyy-mm-dd.xlsx and the Xist_SelectedvsControl.svg files you should aspect the following output:
+Open the **Table_yyyy-mm-dd.xlsx** file in a spreadsheet program (eg. LibreOffice Calc, WPS Office Spreadsheet, or Microsoft Excel) and the **Xist_SelectedvsControl.svg** file in a vector graphics program (eg. Adobe Illustratore, or Inkscape). You should see the output in table format and a graphic view of the insertions in the _Xist_ gene similar as following output:
 
 ![alt text] (https://github.com/gdiminin/HaSAPPy/blob/master/docs/Tutorials/Figures/Test_HaSAPPy_installation.png)
 
-If this is what you see, your HaSAPPy installation is working correctly! Have fun!!!!
+If this is what you see, your HaSAPPy installation is working correctly. Congratulation!!!!
 
 
 [**RETURN TO THE MAIN PAGE**](https://github.com/gdiminin/HaSAPPy/blob/master/README.md)
