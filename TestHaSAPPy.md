@@ -42,7 +42,7 @@ Add a **reference/** folder where the genome sequences and indices will be store
 	    └── ...
 ```
 
-Genome sequences of many common species are provided at:
+Genome sequences and indices for read mapping for common species are available at:
 
 http://support.illumina.com/sequencing/sequencing_software/igenome.html
 
@@ -54,7 +54,7 @@ tar -xzvf Mus_musculus_UCSC_mm10.tar.gz
 ```
 
 
-### Self execute permission on PreprocessReads
+### Selt execute permission on PreprocessReads
  
 Enter in the HaSAPPy folder and prepare the program
 
@@ -64,9 +64,13 @@ cd program
 chmod +x PreprocessReads 
 ```
 
-###Build the gene annotation database using GeneReference_built.py
-A gene annotation file for the mouse genome (GCRm38/mm10) is supplied with the source. If you need other genomes suitable annotation files can be obtained from the UCSC genome browser (http://genome.ucsc.edu/cgi-bin/hgTables?command=start). 
-Read the Generate_human_gene_refernce.md tutorial for a detailed exemple
+### Build the gene annotation database using GeneReference_built.py
+
+A gene annotation file for the mouse genome (GCRm38/mm10) is supplied with the source.
+
+<**NOTE:** If you need other genomes suitable annotation files can be obtained from the UCSC genome browser (http://genome.ucsc.edu/cgi-bin/hgTables?command=start). 
+Read the Generate_human_gene_refernce.md tutorial for a detailed example:
+https://github.com/gdiminin/HaSAPPy/blob/master/docs/Tutorials/Generate_human_gene_reference.md
 
 ```
 python GeneReference_built.py -i /Users/User/HaSAPPy/docs/mm10_REFSEQgenes.txt -o /Users/User/HaSAPPy/docs/GeneReference_mouse_mm10.pkl
