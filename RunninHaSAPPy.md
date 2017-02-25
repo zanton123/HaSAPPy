@@ -241,7 +241,7 @@ Location of input file 2 (if pair-end) (add additional lines if necessary):
 
 ## Section 5: Identification of Independent Insertions (I.I.)
 
-For the definition of Independent Insertions from read files, a minimal number of read count can be provided. Insertions that have less than this threshold number of reads at positions will be discarded. This parameter can be useful for reducing noise deriving from sequencing procedure or contaminations. In case sequencing depth is not very deep it also could negatively affect library complexity and resolution (particularly in unselected control samples with large numbers of different insertions). An integer number should be provided. Default is ‘1’, which maintains all insertions.
+For the definition of Independent Insertions from read files, a minimal number of read count can be provided. Insertions that have less than this threshold number of reads at positions will be discarded. This parameter can be useful for reducing noise deriving from sequencing procedure or contaminations. In case sequencing depth is not very deep it also could negatively affect library complexity and resolution (particularly in unselected control samples with large numbers of different insertions). An integer number should be provided. The default calue is set at 1, which maintains all insertions.
 ```
 Number of reads to define a I.I.:
 @5A) 2
@@ -249,14 +249,14 @@ Number of reads to define a I.I.:
 
 HaSAPPy provides the possibility to remove PCR-duplicates from the read count if libraries were sequenced in the paired-end mode. Reads that have exactly the same genomic alignment position on both ends will be merged as PCR duplicates. If you activate this option duplicates and not paired-ends aligned reads will be discharged.
 
-> **NOTE:** This option is implemented in HaSAPPy as an experimental feature and will undergo extensive testing onse paired-end sequencing dataset for screening experiments become available.
+> **NOTE:** This option is implemented in HaSAPPy as an experimental feature and will undergo further development as paired-end sequencing dataset for screening experiments become available.
 
 ```
 If pair-end libraries, do you want to remove PCR-duplicates (mark ‘Y’ or ’N’)?
 @5B) N
 ```
 
-Read mappers provide also information on the quality of read alignments to the reference genome. This parameter (MAPQ) takes the number of mismatches and matches as well as the uniqueness of the alignment position into account. Increasing the alignment quality parameter can help to reduce alignment errors that could affect the analysis, but also will lead to the elimination of reads and therefore could lead to reduced sensitivity. Enter `Y` in the input field below, if you want to activate this selection and provide an integer number as MAPQ threshold (default is 0, all reported alignments are accepted):
+Read mappers provide information on the quality of reproted read alignments to the reference genome. This alignment quality parameter (MAPQ) takes the number of mismatches and matches as well as the uniqueness of the alignment position into account. Reads that have multiple potential mapping positions in the reference genome will have lower alignment quality values (see the documentation of the read mappers for details on the composition of this value). Increasing the alignment quality parameter can help to reduce alignment errors that could affect the analysis, but also will lead to the elimination of reads and therefore could lead to reduced sensitivity. Enter `Y` in the input field below, if you want to activate this selection and provide an integer number as MAPQ threshold (default is 0, all reported alignments are accepted):
 
 ```
 Do you want to indicate a level of alignment fidelity (mark ‘Y’ or ’N’):
@@ -267,7 +267,7 @@ If level of alignment fidelity is requested, provide a limit number:
 
 HaSAPPy provides the possibility to enter a workflow at this step. If this module is the starting point of woud analysis, you should supply information on the name and properties of the NGS libraries and the paths to the read alignment files in SAM format:
 
-> **NOTE:** HaSAPPy does not yet accept BAM files as input at this step in the workflow and SAM files should be used. This avoids repeated compression and decompression but adds to storage requirements.
+> **NOTE:** HaSAPPy does not yet accept BAM files as input at this step in the workflow and SAM format has to be used. This avoids repeated compression and decompression, which decreases processing demand but adds to storage requirements.
 
 ```
 !!!N.B. Compile the following section just if this is your starting point!!!
@@ -330,7 +330,9 @@ Location of input file 1(add additional lines if necessary):
 
 ## Section 7: Comparison of different experiments
 
-The GroupAnalysis.py module collects processed libraries from GeneDefinition.py module and according to user indications subdivides them in groups composed of several replicates. For all the parameters selected (II,KI,Bias,bias_FW,bias_RV,Reads) it calculates mean and standard deviation of the replicates. Groups are then compared respect to a reference group (indicated by the user) and fold difference, ttest and Outlier analysis are calculated.
+The **GroupAnalysis.py** module uses input data that was generated by the **GeneDefinition.py** module for each NGS library. Individual NGS datasets are associated with experiments. One reference (control) and multiple selected groups can be specified. This could for example be useful if a time-coarse screening is performed and selection would be followed by drawing sampled from sequential timepoints. A simple experiment would just have an unselected and a selected group, which each contain several NGS datasets of the replicates. For this reason the minimum number of this comparison is 2 groups.
+
+All previously calculated parameters (II,KI,Bias,bias_FW,bias_RV,Reads) can be selected for a group analysis. Calculation of the mean and standard deviation for a group from the replicates is supported. Experimental groups are also compared to the reference group and fold difference, ttest, and Outlier analysis are calculated.
 
 Provide the number of groups present in your analysis. An integer number >= 2 is requested 
 ```
@@ -338,20 +340,21 @@ Number of groups to be analysed:
 @7A) 3
 ```
 
-The name of the reference group must be provided; table columns labelling will use this name for identification. Mean and standard deviation will be calculated BUT fold difference,ttest… will not be available for this group. In general, unselected libraries are used as reference.
+The name of the reference group must be provided. This name will be used in table column headings For the reference group mean and standard deviation will be calculated BUT fold difference, ttest, etc will not be available for this group (these parameters are provided only for experimental groups as this is the reference for the comparison). In general, unselected libraries are used as reference.
 ```
 Reference group name:
 @7B) Unselected
 ```
 
-Provide the names of the libraries present in the group. A list of library names subdivided by a ‘,’ is requested. Spaces between library names is managed by HaSAPPy. If this is not the starting point of the analysis, libraries name must correspond to the ones defined in the previous modules.
-> You are not allowed to introduce new libraries produced in previous pipeline. In this case, generate a new pipeline starting from the GroupAnalysis.py module and introduce libraries used for the analysis in the ‘starting point’ tasks of this section.
+Provide the names of the NGS libraries present in the group. A list of library names subdivided by a `,` is requested. Spaces between library names are accepted and trimmed by HaSAPPy. If this is not the starting point of the analysis, libraries name must correspond to the library names defined in the previous section `@2C)` modules.
+> New libraries produced in previous runs of the workflow cannot be added at this stage into the pipeline. If you need to combine NGS datasets from multiple data processing runs at this stage, a new pipeline can be generated starting from the GroupAnalysis.py module in which all NGS libraries used for the analysis can be introduced in the ‘starting point’ tasks (see below) of this section.
+
 ```
 Reference group data (provide the library names separated by a ‘,’ (ex. ‘lib1,lib2,lib3’)):
 @7C) ctrl1 ,ctrl2, ctrl3
 ```
 
-Provide the name of the analysed group. If you have several experimental conditions, multiple groups can be created. They will all be compared to the reference group. In each line provide the name of the independent group.
+Provide the name of the analysed group. If you have several experimental conditions (eg timepoints in selection), multiple groups can be created. They will all be compared to the reference group. For each experimental group a line starting with an `@7D)` TAG followed by the group name should be added:
 ```
 Other data group name(add additional lines if necessary):
 @7D) Condition_A
@@ -359,7 +362,10 @@ Other data group name(add additional lines if necessary):
 …
 ```
 
-As for the reference group, provide the libraries name corresponding to the group replicates. Pay attention that HaSAPPy aspects the same number of lists as the group number defined in the previous task. Correspondence of libraries to group is dependent on order of compilation
+As for the reference group, provide the names for the NGS libraries corresponding to the replicates of the groups.
+
+>**IMPORTANT: ** HaSAPPy requires one line for each list of NGS library names. The order of the lines must be exactly the same as the names of the groups are provided in `@7D)`.
+
 ```
 Other data group (provide the library names separated by a ‘,’ (ex. ‘lib1,lib2,lib3’))(add additional lines if necessary):
  @7E) ExpA_1, ExpA_2, ExpA_3
@@ -367,7 +373,9 @@ Other data group (provide the library names separated by a ‘,’ (ex. ‘lib1,
 …
 ```
 
-User can define which parameters should be analysed. Mark ‘Y’ or ‘N’ according to your needs. If a parameter was not collected during library generation (GeneDefinition.py module), the parameter will be skipped from the analysis. If you are comparing libraries with a different set of analysed parameters (this is the starting point of your analysis), HaSAPPy will premature interrupt raising an issue; in this case check the parameters analysed in the different libraries exploring the library_info.txt file.
+Selection of parameters that should be calculated requires a simple `Y` or `N` in the following input fields. If a parameter was not calculated during data processing by **GeneDefinition.py module**, this parameter is automatically be skipped from the following analysis.
+
+> **NOTE:** If you are comparing libraries with a different set of analysed parameters (only valid if this is the starting point of your analysis), HaSAPPy can terminate with an error. In this case, please check that all parameters analysed are logged in the library_info.txt file for the different libraries. To avoid this problem entirely it is recommended to calculate all parameters during data processing in the workflow.
 ```
 Type of parameters analysed (mark ‘Y’ or ’N’):
 	Independent insertions (I.I.):
@@ -380,13 +388,13 @@ Type of parameters analysed (mark ‘Y’ or ’N’):
 	@7I) N
 ```
 
-To summaries the results of multiple parameters and to provide a ranking of the most promising candidates, genes can be sorted by an outlier test (for details on the Outlier analysis refer to HaSAPPy manual). If you are marking ‘Y’, you will activate this analysis and the outlier factor will be available for the following modules.
+To summaries the results of multiple parameters and to provide a ranking of the most promising candidates, genes can be sorted by an outlier test (for details on the Outlier analysis refer to HaSAPPy manual). Entering `Y` in the input field below activates this feature and the outlier factor will be available for further steps of the analysis (eg include in output tables, and 3D parameter distribution plots).
 ```
 Perform Outlier analysis(mark ‘Y’ or ’N’):
 @7J) Y
 ```
 
-Among the parameters selected for the GroupAnalyis, you can mark those one that you want to use for derivation of the Outlier value. Compile these tasks only if you activated the Outlier option in the previous task
+Among the parameters selected for the GroupAnalyis, you can mark those one that you want to use for derivation of the Outlier value. These input fields are only required if the Outlier option was activated:
 ```
 Parameters used for Outlier analysis (Fill this part just if marked ‘Y’ to the previously task):
 	Type of parameters analysed (mark ‘Y’ or ’N’):
@@ -400,14 +408,14 @@ Parameters used for Outlier analysis (Fill this part just if marked ‘Y’ to t
 		@7N) N
 ```
 
-Outlier analysis compares the ratio of selected parameters between the analysed group respect to the reference group. Fold does not take into account absolute number of insertions present for gene. Therefore, it could happen that genes supported by a little number of insertions gain a high Outlier value through their underrepresentation in the reference. It’s difficult to estimate if this gene could be interesting candidate. You can balance this behavior introducing a Fidelity value that in the percentage that you indicate (0-100) tries to correct outlier outcome with the absolute number of the gene parameters in analysed group (suggested starting fidelity value: 10).An integer number between 0 to 100 is requested
+Outlier analysis is performed for comparison of the ratio of wpecified parameters between the analysed experimental group and the reference group. A Fold value does not contain information on the absolute number of insertions observed for a gene in the experiment. Therefore, it could happen that genes with very few or no insertions in the reference group would reach a high Outlier value (underrepresentation in the reference group is not uncommon due to undersampling). For correcting for this behavior a Fidelity value can be specified as a percentage (0-100) with which the absolute number of insertions will be used to correct the outlier outcome for the gene (a recommened starting fidelity value is 10). An integer number between 0 to 100 is required:
 ```
 Fidelity value for Outlier analysis(Fill this part just if marked ‘Y’ to the 7J task):
 Provide a value between 0 to 100 (ex. 10)
 @7O) 10
 ```
 
-If this module is the starting point of the analysis, you should provide information on the name and locations of the library files ( “../../library_dddd-mm-yy/raw/library.GenesData.pkl”) generated by the GeneDefinition.py module. Pay attention to the name correspondence with the one used in section 7C and 7E
+If this module is the **starting point of the analysis**, you should provide information on the name and locations of the database files for the NGS libraries ( “../../library_dddd-mm-yy/raw/library.GenesData.pkl”) generated by the **GeneDefinition.py** module. One line is added for each library. Pay attention to the name correspondence with the one used in section `@7C)` and `@7E)`:
 ```
 !!!N.B. Compile the following section just if this is your starting point!!!
 How many library do you want to analyse?:
@@ -591,3 +599,5 @@ Save the completed `LoadModule.txt` file with a new name and use it as input for
 `python HaSAPPy_start.py <path-to-LoadModule.txt>`
 
 HaSAPPy command scripts are parsed in straight forward a simple way by searching for the specific TAGs and reading the remainder of the line into a Python object. Only TAG lines that correspond to scheduled data processing sections are required, all other lines are ignored by HaSAPPy and simply support the user for entering the correct information. This should make it possible to use a line based interface for producing command scripts in an automated or GUI supported way.
+
+[**RETURN TO THE MAIN PAGE**](https://github.com/gdiminin/HaSAPPy/blob/master/README.md)
