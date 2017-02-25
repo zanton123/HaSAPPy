@@ -376,6 +376,7 @@ Other data group (provide the library names separated by a ‘,’ (ex. ‘lib1,
 Selection of parameters that should be calculated requires a simple `Y` or `N` in the following input fields. If a parameter was not calculated during data processing by **GeneDefinition.py module**, this parameter is automatically be skipped from the following analysis.
 
 > **NOTE:** If you are comparing libraries with a different set of analysed parameters (only valid if this is the starting point of your analysis), HaSAPPy can terminate with an error. In this case, please check that all parameters analysed are logged in the library_info.txt file for the different libraries. To avoid this problem entirely it is recommended to calculate all parameters during data processing in the workflow.
+
 ```
 Type of parameters analysed (mark ‘Y’ or ’N’):
 	Independent insertions (I.I.):
