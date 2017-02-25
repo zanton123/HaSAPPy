@@ -1,19 +1,21 @@
-#Test HaSAPPy installation using LoadModule_test.txt files
-In this tutorial, we are going to verify correct installation of the HaSAPPy software and all its dependencies using a pre-compiled LoadModule.txt file and a Sequence_test file avaiable in the package.
-It is recommended, after every new installation, to run this test before to start using HaSAPPy for your purposes.
+# Performing a test run of your HaSAPPy installation
 
-The working directory for this tutorial is :
+This tutorial shows how to quickly verify that HaSAPPy is correctly installed on your system and all dependencies are met. For testing the core functionality of HaSAPPy a pre-filled **LoadModule.txt** command script and a **Sequence_test** file are included in the docs/test folder in the installation.
+It is recommended to run this text for a new installation before starting to use HaSAPPy for data analysis workflows.
+
+The working directory for this tutorial is:
 
 ```
 /Users/User
 ```
 
-##Prerequisites
+## Prerequisites
+
 1. Installation of HaSAPPy package
 2. Necessary Python packages correctly updated
 3. Installation of bowtie2 
 
-###Create a directory for storing experiments and runs
+### Create a folder where the experiments and run information will be stored
 
 ```
 |- HaSAPPy
