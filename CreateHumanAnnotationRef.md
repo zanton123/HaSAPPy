@@ -115,7 +115,7 @@ gene_reference.head(10)
 
 ```python
 for column in gene_reference.columns:
-	print column
+    print column
 ```
 
 * the number of genes
