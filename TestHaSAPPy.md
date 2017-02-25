@@ -65,7 +65,7 @@ tar -xzvf Mus_musculus_UCSC_mm10.tar.gz
 
 ### Set execute permission on PreprocessReads
  
-PreprocessReads is a precompiled executable file for read trimming (the source code is available at https://github.com/zanton123/PreprocessReads). You need to set the execute permission on Linux based file systems to be able to run the program. Enter the /HaSAPPy/program/** folder and set the execute property with the following commands:
+PreprocessReads is a precompiled executable file for read trimming (the source code is available at [github](https://github.com/zanton123/PreprocessReads). You need to set the execute permission on Linux based file systems to be able to run the program. Enter the /HaSAPPy/program/** folder and set the execute property with the following commands:
 
 ```
 cd ..
@@ -78,8 +78,7 @@ chmod +x PreprocessReads
 A gene annotation file for the mouse genome (GCRm38/mm10) is supplied with the source.
 
 >**NOTE:** If you need other genomes suitable annotation files can be obtained from the UCSC genome browser (http://genome.ucsc.edu/cgi-bin/hgTables?command=start). 
-Read the Generate_human_gene_refernce.md tutorial for a detailed example:
-https://github.com/gdiminin/HaSAPPy/blob/master/docs/Tutorials/Generate_human_gene_reference.md
+Read the [Generate_human_gene_reference](https://github.com/gdiminin/HaSAPPy/blob/master/docs/Tutorials/Generate_human_gene_reference.md) tutorial for a detailed example:
 
 ```
 python GeneReference_built.py -i /Users/User/HaSAPPy/docs/mm10_REFSEQgenes.txt -o /Users/User/HaSAPPy/docs/GeneReference_mouse_mm10.pkl
