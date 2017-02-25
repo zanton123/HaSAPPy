@@ -78,7 +78,7 @@ chmod +x PreprocessReads
 A gene annotation file for the mouse genome (GCRm38/mm10) is supplied with the source.
 
 >**NOTE:** If you need other genomes suitable annotation files can be obtained from the UCSC genome browser (http://genome.ucsc.edu/cgi-bin/hgTables?command=start). 
-Read the [Generate_human_gene_reference](https://github.com/gdiminin/HaSAPPy/blob/master/docs/Tutorials/Generate_human_gene_reference.md) tutorial for a detailed example:
+Read the [Generate a human gene reference](https://github.com/gdiminin/HaSAPPy/blob/master/docs/Tutorials/Generate_human_gene_reference.md) tutorial for a detailed example:
 
 ```
 python GeneReference_built.py -i /Users/User/HaSAPPy/docs/mm10_REFSEQgenes.txt -o /Users/User/HaSAPPy/docs/GeneReference_mouse_mm10.pkl
