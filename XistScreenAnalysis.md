@@ -1,4 +1,4 @@
-# Time for a real case: Identify candidates involved in X chromosome inactivation
+# Time for a real case: Using HaSAPPy for analysing a screen for identifying candidates involved in X chromosome inactivation
 
 In this tutorial, we are going to perform an anlysis with HaSAPPy software of a published datasets from a haploid embryonic stem cell screen to identify modulators of X chromosome inactivation. For the details of the screening refer to the paper ([Monfort et al., 2015](https://www.ncbi.nlm.nih.gov/pubmed/26190100)).
 
