@@ -126,7 +126,7 @@ print len(gene_reference.index)
 
 The expected output should be
 
-```
+```python
 >>> for column in gene_reference.columns:
 ...     print column
 ... 
