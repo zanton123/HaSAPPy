@@ -435,9 +435,9 @@ Location of input file (add additional lines if necessary):
 
 ## Section 8: Generate tables
 
-The Tables.py module provides the user to organize calculated data in an Excel table. Selection of parameters and layout of the tables can be customized in the command script. The user has further the possibility to specify parameters for sorting and filtering the data.
+The **Tables.py** module implements the output section of the workflow for generating a summary of all calculated parameters on the datasets in table format. Multiple tables can be specified and will be combined into an .xlsx formated file that can be opened by common spreadsheet programs (eg. LibreOffice Calc, Microsoft Excel, or WPS (Kingsoft) Office Spreadsheet). The parameters to be included and the layout of the tables can be customized in the command script. In addition, criteria for  sorting and filtering the data can be specified.
 
-Indicate the name of the tables (Excel sheets) that you want to generate. 
+Specify the names for the tables (Excel sheets) that you want to generate. Each worksheet name should be entered on a separate line (multiple worksheets can be generated):
 ```
 Table name representation(add additional lines if necessary):
 @8A) All_data
@@ -447,16 +447,16 @@ Table name representation(add additional lines if necessary):
 … 
 ```
 
-The Table.py module collects user information according 3 parameters:
+The **Table.py** module collects user information for 3 parameters:
 
-1. Samples : which group you want to represent. If you selects ‘all’, all the group will be represented (following our example: Unselected, Condition_A, Condition_B).If instead you are providing a specific group name, pay attention to correctly report the group as indicated in section 7.
-2. Parameters: which parameter you want to represent for the selected groups among II, KI, Bias, bias_FW, bias_RV, Reads and Score (Outlier analysis). If you mark ‘all’, all available parameters for the indicated group will be presented.
-3. Data type: which information of the selected parameter you want to highlight. You can choose between:
-  * ‘raw’: provides parameter values of all the replicates composing selected groups
-  * ‘mean’: provides parameter values of the average of the replicates composing selected groups
-  * ‘stdev’,’fold’ and ’ttest’: provides parameter information of the comparison of the analysed group respect to the reference. They will be skipped from the analysis if the group selected is the reference.
+1. Samples - Which group you want to represent: If you selects ‘all’, all the group will be represented (following our example: Unselected, Condition_A, Condition_B). If instead you are providing a specific group name (eg. Condition_A), pay attention to use the group name that was provided in section 7.
+2. Parameters - Which parameter you want to represent for the selected groups: choose from II, KI, Bias, bias_FW, bias_RV, Reads and Score (Outlier analysis). If you enter ‘all’, all available parameters for the indicated group will be presented in the output table.
+3. Data type - Which information of the selected parameter should be included in the table; choose between:
+  * ‘raw’: provides parameter values for all individual replicates of the selected groups (each as a column in the table)
+  * ‘mean’: provides parameter values of the average of the replicates of the selected groups (one column per group)
+  * ‘stdev’,’fold’ and ’ttest’: provides parameter information of the comparison of the analysed group respect to the reference. These are skipped from the analysis for the reference group (eg unselected or control group)
 
- The ‘all’ code will provide all the possible combination of Data type. The Score parameter doesn’t take any Data type information.
+ Entering ‘all’ for any of the parameters will include all possible combinations of the data types for this parameter in the output table. The Score parameter doesn’t take any Data type information.
 
 Using these 3 elements you can generate a selector and design your table format. The selector structure to provide is:
 ```
@@ -481,21 +481,23 @@ Construct table representation using following keys (each new line correspond to
 …
 ```
 
-User can also decide to select the data to represent and the order applying filters.
-Filters definition depend on 3 elements:
-1. Keys: a selector as defined in the previous task. Naturally you have to precisely indicate a unique identifier (the ‘all’ possibility can not be applied). The key has not to be present in the generated table, but can refer to any selector available in the analysis
-2. Symbols: available symbols can be choose between the one of selection (‘>’, ‘>=’, ‘<’ , ‘<=’ , ‘==’) or the one of ordering (‘ascending’, ‘descending’)
-3. Number: if as symbol was picked a selection one, a number must be provided for comparison.
+The user can also filter and sort the data in the output tables.
+Filter definition depends on 3 elements:
+
+1. Keys: A selector of a parameter as defined in the previous input field. Only unique identifiers are permitted and the ‘all’ selector is not supported. The key does not need to be actually present in the generated table, but can refer to any selector available in the analysis
+2. Symbols: available symbols can come from comparators: ‘>’, ‘>=’, ‘<’ , ‘<=’ , ‘==’) or indicate ordering: ‘ascending’, ‘descending’
+3. Number: if as comparator symbol was used, a number must follow for naking the comparison.
+
 Using these 3 elements you can generate a filter and design your table format. The selector structure to provide is:
 ```
 filter[Keys ,symbols,number]
 ```
-In a table you can provide multiple selecting criteria adding filters separeted with a ‘,’:
+In a table you can provide multiple criteria for seletion by adding multiple filters separeted by a comma (`,`):
 ```
 filter[Keys_1 ,symbols_1,number_1] ’, ‘ filter[Keys_2 ,symbols_2,number_2]
 ```
 
-Pay attention that HaSAPPy needs to have the same amount of filter lines (i.e. ‘@8C)’) as the number of generated table. If you don’t want to apply any kind of filter for a table, crate an empty filter line
+> **NOTE:** Pay attention that HaSAPPy requires one filter line starting with the `@8C)` TAG for each generated table. Empty filter lines should be used for tables without filtering. The filters will be applied to the tables in the same order as the tables are listed.
 ```
 Provide a filter parameter to select/sort values displayed (N.B. more than one filter can be defined):
 	Keys: as previously defined (N.B. you can not use as parameter ‘all’) 
@@ -510,7 +512,7 @@ Provide a filter parameter to select/sort values displayed (N.B. more than one f
 …
 ```
 
-If this module is the starting point of the analysis, you should provide information on the location of the GroupAnalysis to use for table generation ( “../../Analysis/yyyy-mm-dd /raw/GroupAnalysis.pkl”)
+If this module is the starting point of the analysis, you should provide information on the location of the GroupAnalysis to use for table generation ( `../../Analysis/yyyy-mm-dd /raw/GroupAnalysis.pkl`):
 
 ```
 !!!N.B. Compile the following section just if this is your starting point!!!
@@ -599,6 +601,6 @@ Save the completed `LoadModule.txt` file with a new name and use it as input for
 
 `python HaSAPPy_start.py <path-to-LoadModule.txt>`
 
-HaSAPPy command scripts are parsed in straight a forward ane simple way. The parser in the the **INFOloads.py** module searches for specific TAGs (eg. `@1A)` and reads the remainder of the line into a Python object. Only TAG lines that correspond to scheduled data processing sections of a workflow are required. All other lines are ignored by HaSAPPy and simply contain text for supporting the user for entering the correct information. This should make it possible to use a line based interface for producing command scripts in an automated or GUI supported way.
+HaSAPPy command scripts are parsed in straight a forward ane simple way. The parser in the the **INFOloads.py** module searches for specific TAGs (eg. `@1A)` and reads the remainder of the line into a Python object. Only TAG lines that correspond to scheduled data processing sections of a workflow are required. All other lines are ignored by HaSAPPy and simply contain text for supporting the user for entering the correct information. This should make it possible to use a line based interface for producing command scripts in an automated or GUI supported way in the future.
 
 [**RETURN TO THE MAIN PAGE**](https://github.com/gdiminin/HaSAPPy/blob/master/README.md)
