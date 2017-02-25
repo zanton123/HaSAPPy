@@ -498,6 +498,7 @@ filter[Keys_1 ,symbols_1,number_1] ’, ‘ filter[Keys_2 ,symbols_2,number_2]
 ```
 
 > **NOTE:** Pay attention that HaSAPPy requires one filter line starting with the `@8C)` TAG for each generated table. Empty filter lines should be used for tables without filtering. The filters will be applied to the tables in the same order as the tables are listed.
+
 ```
 Provide a filter parameter to select/sort values displayed (N.B. more than one filter can be defined):
 	Keys: as previously defined (N.B. you can not use as parameter ‘all’) 
