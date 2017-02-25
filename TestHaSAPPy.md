@@ -16,28 +16,33 @@ The working directory for this tutorial is:
 3. Installation of bowtie2 
 
 ### Create a folder where the experiments and run information will be stored
-
+The folder structure should look like this:
 ```
-|- HaSAPPy
-    |- ...
-    |- experiments
-        |- test
-            |- ...
-```
-
-###Download and unpack sequence archives for PhiX and Mus Musculus genomes
-Create a folder where to store genomes sequence archives
-
-```
-|- HaSAPPy
-    |- ...
-    |- experiments
-        |- ...
-    |- reference
-        |- ...
+/Users/User/
+|
+└── HaSAPPy
+    ├── ...
+    └── experiments
+        └── test
+            └── ...
 ```
 
-Sequences of many common genomes are provided at:
+### Download and unpack sequence archives for PhiX and Mus Musculus genomes
+Add a **reference/** folder where the genome sequences and indices will be stored:
+
+```
+/Users/User/
+|
+└── HaSAPPy
+    ├── ...
+    └── experiments
+    |   └── test
+    |       └── ...
+    └── reference
+	    └── ...
+```
+
+Genome sequences of many common species are provided at:
 
 http://support.illumina.com/sequencing/sequencing_software/igenome.html
 
