@@ -271,7 +271,7 @@ Open the **Table_yyyy-mm-dd.xlsx** file in a spreadsheet program (eg. LibreOffic
 
 ![alt text] (https://github.com/gdiminin/HaSAPPy/blob/master/docs/Tutorials/Figures/Test_HaSAPPy_installation.png)
 
-If this is what you see, your HaSAPPy installation is working correctly. Congratulation!!!!
+If this is what you see, you have now a working HaSAPPy installation. Congratulation!!!!
 
 
 [**RETURN TO THE MAIN PAGE**](https://github.com/gdiminin/HaSAPPy/blob/master/README.md)
