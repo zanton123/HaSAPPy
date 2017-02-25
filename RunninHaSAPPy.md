@@ -485,7 +485,7 @@ The user can also filter and sort the data in the output tables.
 Filter definition depends on 3 elements:
 
 1. Keys: A selector of a parameter as defined in the previous input field. Only unique identifiers are permitted and the ‘all’ selector is not supported. The key does not need to be actually present in the generated table, but can refer to any selector available in the analysis
-2. Symbols: available symbols can come from comparators: ‘>’, ‘>=’, ‘<’ , ‘<=’ , ‘==’) or indicate ordering: ‘ascending’, ‘descending’
+2. Symbols: available symbols can come from comparators: ‘>’, ‘>=’, ‘<’ , ‘<=’ , ‘==’, or indicate ordering: ‘ascending’, ‘descending’
 3. Number: if as comparator symbol was used, a number must follow for naking the comparison.
 
 Using these 3 elements you can generate a filter and design your table format. The selector structure to provide is:
