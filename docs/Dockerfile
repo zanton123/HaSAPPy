@@ -69,7 +69,7 @@ RUN python GeneReference_built.py -i  /HaSAPPy/docs/RefSeq_human_GRCh38-hg38.txt
 
 RUN cd /HaSAPPy && mkdir reference && cd reference
 RUN wget ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/PhiX/NCBI/1993-04-28/PhiX_NCBI_1993-04-28.tar.gz && \
-		tar -xzf PhiX_NCBI_1993-04-28.tar.gz
+		tar -xzf PhiX_NCBI_1993-04-28.tar.gz && \
 		rm PhiX_NCBI_1993-04-28.tar.gz
 RUN wget ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/Mus_musculus/UCSC/mm10/Mus_musculus_UCSC_mm10.tar.gz && \
 		tar -xzf Mus_musculus_UCSC_mm10.tar.gz && \
