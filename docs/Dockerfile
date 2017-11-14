@@ -1,6 +1,9 @@
 FROM ubuntu:14.04
 LABEL source "HaSAPPy"
 
+# For nvidia-docker use:
+#               FROM nvidia/cuda:6.5-runtime-ubuntu14.04
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
 		ubuntu-desktop \
 		build-essential cmake git \
