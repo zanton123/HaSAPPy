@@ -2,7 +2,7 @@ FROM ubuntu:14.04
 LABEL source "HaSAPPy"
 
 # For nvidia-docker use:
-#               FROM nvidia/cuda:6.5-runtime-ubuntu14.04
+#		FROM nvidia/cuda:6.5-runtime-ubuntu14.04
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
 		ubuntu-desktop \
@@ -24,7 +24,7 @@ RUN wget https://sourceforge.net/projects/bowtie-bio/files/bowtie2/2.3.3.1/bowti
 		unzip bowtie2-2.3.3.1-linux-x86_64.zip && \
 		mv bowtie2-2.3.3.1-linux-x86_64/ bowtie2/ && \
 		rm bowtie2-2.3.3.1-linux-x86_64.zip
-ENV PATH $PATH:/bowtie2
+ENV PATH ${PATH}:/bowtie2
 
 # Get NextGenMap source, build, and install into /usr/local/bin including openCL driver libs
 
@@ -41,28 +41,28 @@ RUN wget http://github.com/Cibiv/NextGenMap/archive/0.5.0.tar.gz && \
 
 # Copy nvBowtie and nvBWT executables to /usr/local/bin/
 
-COPY /home/anton/nvbio/build/nvBowtie/nvBowtie/ /usr/local/bin/
-COPY /home/anton/nvbio/build/nvBWT/nvBWT/ /usr/local/bin/
+COPY nvBowtie /usr/local/bin/
+COPY nvBWT /usr/local/bin/
 
 
 # Get SRA Tooklit from NCBI
 
 RUN wget https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.8.2-1/sratoolkit.2.8.2-1-ubuntu64.tar.gz && \
-		tar -zxf sratoolkit.2.8.1-2-ubuntu64.tar.gz && \
-		rm sratoolkit.2.8.1-2-ubuntu64.tar.gz
-ENV PATH $PATH:/sratoolkit.2.8.1-2-ubuntu64/bin
+		tar -zxf sratoolkit.2.8.2-1-ubuntu64.tar.gz && \
+		rm sratoolkit.2.8.2-1-ubuntu64.tar.gz
+ENV PATH ${PATH}:/sratoolkit.2.8.2-1-ubuntu64/bin
 
 
 # Get HaSAPPy from github --------------!!-- NEED TO ADD RefSeq_human_GRCh38-hg38.txt to /HaSAPPy/docs/
 
 RUN cd / && \
 		git clone https://github.com/gdiminin/HaSAPPy.git && \
-		HaSAPPy/program && \
+		cd /HaSAPPy/program && \
 		chmod +x PreprocessReads
 
 # Generate annotation databases
-RUN python GeneReference_built.py -i /HaSAPPy/docs/mm10_REFSEQgenes.txt -o /HaSAPPy/docs/GeneReference_Mouse-MM10.pkl
-RUN python GeneReference_built.py -i  /HaSAPPy/docs/RefSeq_human_GRCh38-hg38.txt -o /HaSAPPy/docs/GeneReference_Homo.pkl
+RUN python /HaSAPPy/program/GeneReference_built.py -i /HaSAPPy/docs/mm10_REFSEQgenes.txt -o /HaSAPPy/docs/GeneReference_Mouse-MM10.pkl
+# --- !!--- RUN python /HaSAPPy/program/GeneReference_built.py -i  /HaSAPPy/docs/RefSeq_human_GRCh38-hg38.txt -o /HaSAPPy/docs/GeneReference_Homo.pkl
 
 
 # --------------- INIT -------------------------------
@@ -77,7 +77,7 @@ RUN wget ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/PhiX/NCBI/1993-04-28/PhiX
 RUN wget ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/Mus_musculus/UCSC/mm10/Mus_musculus_UCSC_mm10.tar.gz && \
 		tar -xzf Mus_musculus_UCSC_mm10.tar.gz && \
 		rm Mus_musculus_UCSC_mm10.tar.gz
-RUN ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/Homo_sapiens/UCSC/hg38/Homo_sapiens_UCSC_hg38.tar.gz && \
+RUN wget ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/Homo_sapiens/UCSC/hg38/Homo_sapiens_UCSC_hg38.tar.gz && \
 		tar -xzf Homo_sapiens_UCSC_hg38.tar.gz && \
 		rm Homo_sapiens_UCSC_hg38.tar.gz
 
@@ -105,6 +105,11 @@ RUN fastq-dump -O selected/ --gzip SRR2064908
 
 RUN apt-get purge -y --auto-remove build-essential cmake git && \
 		rm -rf /var/lib/apt/lists/*
+
+WORKDIR data/
+
+CMD bash
+
 
 WORKDIR data/
 
