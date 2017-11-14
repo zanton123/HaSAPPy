@@ -99,6 +99,7 @@ RUN fastq-dump -O selected/ --gzip SRR2064908
 
 
 # Cleanup docker image
+
 RUN apt-get purge -y --auto-remove build-essential cmake git && \
 		rm -rf /var/lib/apt/lists/*
 
