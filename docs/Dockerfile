@@ -64,7 +64,9 @@ RUN python GeneReference_built.py -i  /HaSAPPy/docs/RefSeq_human_GRCh38-hg38.txt
 
 # --------------- INIT -------------------------------
 
+
 # Download reference sequences from iGenomes
+
 RUN cd /HaSAPPy && mkdir reference && cd reference
 RUN wget ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/PhiX/NCBI/1993-04-28/PhiX_NCBI_1993-04-28.tar.gz && \
 		tar -xzf PhiX_NCBI_1993-04-28.tar.gz
